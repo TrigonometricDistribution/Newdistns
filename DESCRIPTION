@@ -1,15 +1,15 @@
 Package: Newdistns
 Type: Package
-Title: Computes pdf, cdf, quantile and random numbers for 19 general
-        families of distributions
-Version: 1.0
-Date: 2013-8-9
-Author: Saralees Nadarajah
+Title: Computes Pdf, Cdf, Quantile and Random Numbers, Measures of
+        Inference for 19 General Families of Distributions
+Version: 2.0
+Date: 2015-02-27
+Author: Saralees Nadarajah, Ricardo Rocha
 Maintainer: Saralees Nadarajah <Saralees.Nadarajah@manchester.ac.uk>
-Depends: R (>= 2.15.0)
-Description: Computes the probability density function, cumulative distribution function, quantile function, random numbers for the following general families of  distributions (each family defined in terms of an arbitrary cdf G): Marshall Olkin G distributions due to Marshall and Olkin  (1997), exponentiated G distributions due to Gupta et al. (1998), beta G distributions due to Eugene et al. (2002), gamma G distributions due to Zografos and Balakrishnan (2009), Kumaraswamy G distributions due to Cordeiro and Castro (2011), generalized beta G distributions due to Alexander et al. (2012), beta extended G distributions due to Cordeiro et al. (2012), gamma G distributions due to Ristic and Balakrishnan (2012), gamma uniform G distributions due to Torabi and Montazeri (2012), beta exponential G distributions due to Alzaatreh et al. (2013), Weibull G distributions also due to Alzaatreh et al. (2013), log gamma G I distributions due to Amini et al. (2013), log gamma G II distributions also due to Amini et al. (2013), exponentiated generalized G distributions due to Cordeiro et al. (2013), exponentiated Kumaraswamy G distributions due to Lemonte et al. (2013), geometric exponential Poisson G distributions due to Nadarajah et al. (2013a), truncated-exponential skew-symmetric G distributions due to Nadarajah et al. (2013b), modified beta G distributions due to Nadarajah et al. (2013c), and exponentiated exponential Poisson G distributions due to Ristic and Nadarajah (2013).
+Depends: AdequacyModel
+Description: Computes the probability density function, cumulative distribution function, quantile function, random numbers and measures of inference for the following general families of  distributions (each family defined in terms of an arbitrary cdf G): Marshall Olkin G distributions, exponentiated G distributions, beta G distributions, gamma G distributions, Kumaraswamy G distributions, generalized beta G distributions, beta extended G distributions, gamma G distributions, gamma uniform G distributions, beta exponential G distributions, Weibull G distributions, log gamma G I distributions, log gamma G II distributions, exponentiated generalized G distributions, exponentiated Kumaraswamy G distributions, geometric exponential Poisson G distributions, truncated-exponential skew-symmetric G distributions, modified beta G distributions, and exponentiated exponential Poisson G distributions.
 License: GPL (>= 2)
-Packaged: 2013-08-19 19:51:42 UTC; mbbsssn2
+Packaged: 2015-03-04 10:27:15 UTC; Ricardo
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-08-20 01:05:15
+Date/Publication: 2015-03-04 12:25:04

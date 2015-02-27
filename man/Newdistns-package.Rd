@@ -3,22 +3,21 @@
 \alias{Newdistns}
 \docType{package}
 \title{
-Computes pdf, cdf, quantile and random numbers for 19 general families of distributions
+Computes Pdf, Cdf, Quantile, Random Numbers and Measures of Inference for 19 General Families of Distributions
 }
-\description{Computes the probability density function, cumulative distribution function, quantile function, random numbers for the following general families of  distributions (each family defined in terms of an arbitrary cdf G): Marshall Olkin G distributions due to Marshall and Olkin  (1997),
-exponentiated G distributions due to Gupta et al. (1998), beta G distributions due to Eugene et al. (2002), gamma G distributions due to Zografos and Balakrishnan (2009), Kumaraswamy G distributions due to Cordeiro and Castro (2011), generalized beta G distributions due to Alexander et al. (2012),
+\description{Computes the probability density function, cumulative distribution function, quantile function, random numbers and measures of inference for the following general families of  distributions (each family defined in terms of an arbitrary cdf G): Marshall Olkin G distributions due to Marshall and Olkin  (1997), exponentiated G distributions due to Gupta et al. (1998), beta G distributions due to Eugene et al. (2002), gamma G distributions due to Zografos and Balakrishnan (2009), Kumaraswamy G distributions due to Cordeiro and Castro (2011), generalized beta G distributions due to Alexander et al. (2012),
 beta extended G distributions due to Cordeiro et al. (2012), gamma G distributions due to Ristic and Balakrishnan (2012), gamma uniform G distributions due to Torabi and Montazeri (2012), beta exponential G distributions due to Alzaatreh et al. (2013), Weibull G distributions also due to Alzaatreh et al. (2013), log gamma G I distributions due to Amini et al. (2013), log gamma G II distributions also due to Amini et al. (2013), exponentiated generalized G distributions due to Cordeiro et al. (2013), exponentiated Kumaraswamy G distributions due to Lemonte et al. (2013), geometric exponential Poisson G distributions due to Nadarajah et al. (2013a), truncated-exponential skew-symmetric G distributions due to Nadarajah et al. (2013b), modified beta G distributions due to Nadarajah et al. (2013c), and exponentiated exponential Poisson G distributions due to Ristic and Nadarajah (2013).}
 \details{
 \tabular{ll}{
 Package: \tab Newdistns\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2013-8-9\cr
+Version: \tab 2.0\cr
+Date: \tab 2015-02-27\cr
 License: \tab GPL(>=2)
 }
-probability density function, cumulative distribution function, quantile function, random numbers
+probability density function, cumulative distribution function, quantile function, random numbers and measures of inference
 }
-\author{Saralees Nadarajah
+\author{Saralees Nadarajah, Ricardo Rocha
 
 Maintainer: Saralees Nadarajah <Saralees.Nadarajah@manchester.ac.uk>
 }

@@ -1,10 +1,3 @@
-
-
-#THE GAMMA-UNIFORM DISTRIBUTION AND ITS APPLICATIONS
-#H. Torabi and N. H. Montazeri
-#Kybernetika, vol. 48 (2012), 16-30
-
-
 dgammag<-function(x, spec, a=1, log=FALSE, ...)
 {
         f<-function (z, ...) {do.call(paste("d",spec,sep=""),list(z, ...))}
@@ -41,8 +34,8 @@ qgammag<-function(p, spec, a=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(qgamma(p,shape=a)/(1+qgamma(p,shape=a)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(qgamma(p[p>=0&p<=1],shape=a)/(1+qgamma(p[p>=0&p<=1],shape=a)), ...)
 	return(qf)
 
 }
@@ -55,11 +48,6 @@ rgammag<-function(n, spec, a=1, ...)
 	return(sf)
 }
 
-
-
-#A new method for generating families of continuous distributions
-#A. Alzaatreh, C. Lee, F. Famoye
-#METRON (2013) 71 63-79
 
 
 
@@ -97,8 +85,8 @@ qbetaexpg<-function(p, spec, lambda=1, a=1, b=1, log.p=FALSE, lower.tail=TRUE, .
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(1-(qbeta(1-p,shape1=lambda*(b-1)+1,shape2=a))**(1/lambda), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(1-(qbeta(1-p[p>=0&p<=1],shape1=lambda*(b-1)+1,shape2=a))**(1/lambda), ...)
 	return(qf)
 
 }
@@ -110,10 +98,6 @@ rbetaexpg<-function(n, spec, lambda=1, a=1, b=1, ...)
         sf<-qbetaexpg(u, spec, lambda=lambda, a=a, b=b, ...)
 	return(sf)
 }
-
-#A new method for generating families of continuous distributions
-#A. Alzaatreh, C. Lee, F. Famoye
-#METRON (2013) 71 63-79
 
 
 dweibullg<-function(x, spec, beta=1, c=1, log=FALSE, ...)
@@ -150,8 +134,8 @@ qweibullg<-function(p, spec, beta=1, c=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(1-exp(-beta*(-log(1-p))**(1/c)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(1-exp(-beta*(-log(1-p[p>=0&p<=1]))**(1/c)), ...)
 	return(qf)
 
 }
@@ -165,11 +149,6 @@ rweibullg<-function(n, spec, beta=1, c=1, ...)
 }
 
 
-
-
-#The geometric exponential Poisson distribution
-#S. Nadarajah, V. G. Cancho, E. M. M. Ortega
-#Stat Methods Appl (2013) 22 355-380
 
 
 
@@ -207,8 +186,8 @@ qgepg<-function(p, spec, theta=1, eta=0.5, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq((1/theta)*log(((1-exp(-theta)-eta)*p+exp(-theta))/((1-eta*p)*exp(-theta))), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq((1/theta)*log(((1-exp(-theta)-eta)*p[p>=0&p<=1]+exp(-theta))/((1-eta*p[p>=0&p<=1])*exp(-theta))), ...)
 	return(qf)
 
 }
@@ -220,12 +199,6 @@ rgepg<-function(n, spec, theta=1, eta=0.5, ...)
         sf<-qgepg(u, spec, theta=theta, eta=eta, ...)
 	return(sf)
 }
-
-
-
-#A new lifetime distribution
-#M. M. Ristic and S. Nadarajah
-#Journal of Statistical Computation and Simulation, doi: 10.1080/00949655.2012.697163
 
 
 
@@ -264,8 +237,8 @@ qeepg<-function(p, spec, lambda=1, a=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq((-(1/lambda)*log(1-p*(1-exp(-lambda))))**(1/a), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq((-(1/lambda)*log(1-p[p>=0&p<=1]*(1-exp(-lambda))))**(1/a), ...)
 	return(qf)
 
 }
@@ -278,10 +251,6 @@ reepg<-function(n, spec, lambda=1, a=1, ...)
 	return(sf)
 }
 
-
-#Truncated-exponential skew-symmetric distributions
-#S. Nadarajah, V. Nassiri and A. Mohammadpour
-#Statistics, to appear
 
 
 dtessg<-function(x, spec, lambda=1, log=FALSE, ...)
@@ -318,8 +287,8 @@ qtessg<-function(p, spec, lambda=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(-(1/lambda)*log(1-p*(1-exp(-lambda))), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(-(1/lambda)*log(1-p[p>=0&p<=1]*(1-exp(-lambda))), ...)
 	return(qf)
 
 }
@@ -333,12 +302,6 @@ rtessg<-function(n, spec, lambda=1, ...)
 }
 
 
-#Marshall, A. W. and Olkin, I. (1997).
-#A new method for adding a parameter to a family of distributions with application to the exponential and Weibull families.
-#Biometrika, 84, 641-652.
-
-
-
 
 dmog<-function(x, spec, beta=1, log=FALSE, ...)
 {
@@ -347,8 +310,8 @@ dmog<-function(x, spec, beta=1, log=FALSE, ...)
         F<-function (z, ...) {do.call(paste("p",spec,sep=""),list(z, ...))}
 
 	pdf<-x
-        pdf[log==FALSE]<-beta*f(x, ...)/(1-(1-beta)*F(x, ...))**2
-        pdf[log==TRUE]<-log(beta)+fL(x, ...)-2*log(1-(1-beta)*F(x, ...))
+        pdf[log==FALSE]<-beta*f(x, ...)/((beta+(1-beta)*F(x, ...))**2)
+        pdf[log==TRUE]<-log(beta)+fL(x, ...)-2*log(beta+(1-beta)*F(x, ...))
 	return(pdf)
 
 }
@@ -359,10 +322,10 @@ pmog<-function(x, spec, beta=1, log.p=FALSE, lower.tail=TRUE, ...)
         FL<-function (z, ...) {do.call(paste("p",spec,sep=""),list(z, log.p=TRUE, ...))}
 
 	cdf<-x
-        cdf[log.p==FALSE&lower.tail==TRUE]<-beta*F(x, ...)/(1-(1-beta)*F(x, ...))
-        cdf[log.p==TRUE&lower.tail==TRUE]<-log(beta)+FL(x, ...)-log(1-(1-beta)*F(x, ...))
-        cdf[log.p==FALSE&lower.tail==FALSE]<-(1-F(x, ...))/(1-(1-beta)*F(x, ...))
-        cdf[log.p==TRUE&lower.tail==FALSE]<-log(1-F(x, ...))-log(1-(1-beta)*F(x, ...))
+        cdf[log.p==FALSE&lower.tail==TRUE]<-F(x, ...)/(beta+(1-beta)*F(x, ...))
+        cdf[log.p==TRUE&lower.tail==TRUE]<-FL(x, ...)-log(beta+(1-beta)*F(x, ...))
+        cdf[log.p==FALSE&lower.tail==FALSE]<-beta*(1-F(x, ...))/(beta+(1-beta)*F(x, ...))
+        cdf[log.p==TRUE&lower.tail==FALSE]<-log(beta)+log(1-F(x, ...))-log(beta+(1-beta)*F(x, ...))
 	return(cdf)
 
 }
@@ -374,8 +337,8 @@ qmog<-function(p, spec, beta=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(p/(beta+(1-beta)*p))
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(beta*p[p>=0&p<=1]/(1-(1-beta)*p[p>=0&p<=1]))
 	return(qf)
 
 }
@@ -387,10 +350,6 @@ rmog<-function(n, spec, beta=1, ...)
 	return(sf)
 }
 
-
-#Gupta, R. C., Gupta, P. L. and Gupta, R. D.  (1998).
-#Modeling failure time data by Lehman alternatives.
-#Communications in Statistics---Theory and Methods, 27, 887-904.
 
 
 
@@ -430,8 +389,8 @@ qexpg<-function(p, spec, a=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(p**(1/a), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq((p[p>=0&p<=1])**(1/a), ...)
 	return(qf)
 
 }
@@ -445,9 +404,6 @@ rexpg<-function(n, spec, a=1, ...)
 }
 
 
-#Lemonte, A. J., Barreto-Souza, W. and Cordeiro, G. M. (2013).
-#The exponentiated Kumaraswamy distribution and its log-transform.
-#Brazilian Journal of Probability and Statistics, 27, 31-53. 
 
 
 dexpkumg<-function(x, spec, a=1, b=1, c=1, log=FALSE, ...)
@@ -485,8 +441,8 @@ qexpkumg<-function(p, spec, a=1, b=1, c=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq((1-(1-p**(1/c))**(1/b))**(1/a), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq((1-(1-(p[p>=0&p<=1])**(1/c))**(1/b))**(1/a), ...)
 	return(qf)
 
 }
@@ -498,11 +454,6 @@ rexpkumg<-function(n, spec, a=1, b=1, c=1, ...)
         sf<-qexpkumg(u, spec, a=a, b=b, c=c, ...)
 	return(sf)
 }
-
-
-#Cordeiro, Gauss M.; Ortega, Edwin M. M.; da Cunha, Daniel C. C.
-#The exponentiated generalized class of distributions.
-#Journal of Data Science 11 (2013), 1–27.
 
 
 deg<-function(x, spec, a=1, b=1, log=FALSE, ...)
@@ -539,8 +490,8 @@ qeg<-function(p, spec, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(1-(1-p**(1/b))**(1/a), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(1-(1-(p[p>=0&p<=1])**(1/b))**(1/a), ...)
 	return(qf)
 
 }
@@ -551,12 +502,6 @@ reg<-function(n, spec, a=1, b=1, ...)
         sf<-qeg(u, spec, a=a, b=b, ...)
 	return(sf)
 }
-
-
-#Cordeiro, G. M. and Castro, M. (2011).
-#A new family of generalized distributions.
-#Journal of Statistical Computation and Simulation, 81, 883-898.
-
 
 
 dkumg<-function(x, spec, a=1, b=1, log=FALSE, ...)
@@ -595,8 +540,8 @@ qkumg<-function(p, spec, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq((1-(1-p)**(1/b))**(1/a), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq((1-(1-p[p>=0&p<=1])**(1/b))**(1/a), ...)
 	return(qf)
 
 }
@@ -608,11 +553,6 @@ rkumg<-function(n, spec, a=1, b=1, ...)
         sf<-qkumg(u, spec, a=a, b=b, ...)
 	return(sf)
 }
-
-
-#Cordeiro, G. M., Ortega, E. M. M. and Silva, G. (2012a).
-#The beta extended Weibull family.
-#Journal of Probability and Statistical Science, 10, 15-40.
 
 
 
@@ -650,8 +590,8 @@ qbeg<-function(p, spec, alpha=1, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(-(1/alpha)*log(1-qbeta(p,shape1=a,shape2=b)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1-exp(-alpha)]<-Fq(-(1/alpha)*log(1-qbeta(p[p>=0&p<=1-exp(-alpha)],shape1=a,shape2=b)), ...)
 	return(qf)
 
 }
@@ -659,15 +599,11 @@ qbeg<-function(p, spec, alpha=1, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
 
 rbeg<-function(n, spec, alpha=1, a=1, b=1, ...)
 {	
-	u<-runif(n,min=0,max=1)
+	u<-runif(n,min=0,max=1-exp(-alpha))
         sf<-qbeg(u, spec, alpha=alpha, a=a, b=b, ...)
 	return(sf)
 }
 
-
-#Alexander, C., Cordeiro, G. M., Ortega, E. M. M. and Sarabia, J. M. (2012).
-#Generalized beta-generated distributions.
-#Computational Statistics and Data Analysis, 56, 1880-1897.
 
 
 
@@ -706,8 +642,8 @@ qgbg<-function(p, spec, a=1, b=1, c=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq((qbeta(p,shape1=a,shape2=b))**(1/c), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq((qbeta(p[p>=0&p<=1],shape1=a,shape2=b))**(1/c), ...)
 	return(qf)
 
 }
@@ -719,12 +655,6 @@ rgbg<-function(n, spec, a=1, b=1, c=1, ...)
         sf<-qgbg(u, spec, a=a, b=b, c=c, ...)
 	return(sf)
 }
-
-
-#Modified beta distributions
-#S. Nadarajah, M. Teimouri, S. H. Shih
-#Sankhya, to appear
-
 
 dmbetag<-function(x, spec, beta=1, a=1, b=1, log=FALSE, ...)
 {
@@ -763,8 +693,8 @@ qmbetag<-function(p, spec, beta=1, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(qbeta(p,shape1=a,shape2=b)/(beta-(beta-1)*qbeta(p,shape1=a,shape2=b)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(qbeta(p[p>=0&p<=1],shape1=a,shape2=b)/(beta-(beta-1)*qbeta(p[p>=0&p<=1],shape1=a,shape2=b)), ...)
 	return(qf)
 
 }
@@ -777,10 +707,6 @@ rmbetag<-function(n, spec, beta=1, a=1, b=1, ...)
 	return(sf)
 }
 
-
-#Eugene, N., Lee, C. and Famoye, F. (2002).
-#Beta-normal distribution and its applications.
-#Communications in Statistics---Theory and Methods, 31, 497-512.
 
 
 
@@ -817,8 +743,8 @@ qbetag<-function(p, spec, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(qbeta(p,shape1=a,shape2=b), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(qbeta(p[p>=0&p<=1],shape1=a,shape2=b), ...)
 	return(qf)
 
 }
@@ -831,10 +757,6 @@ rbetag<-function(n, spec, a=1, b=1, ...)
 	return(sf)
 }
 
-
-#M. Amini, S. M. T. K. MirMostafaee, J. Ahmadi
-#Log-gamma-generated families of distributions
-#Statistics, doi: 10.1080/02331888.2012.748775
 
 
 
@@ -874,8 +796,8 @@ qloggammag1<-function(p, spec, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(1-exp(-(1/b)*qgamma(1-p,shape=a)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(1-exp(-(1/b)*qgamma(1-p[p>=0&p<=1],shape=a)), ...)
 	return(qf)
 
 }
@@ -887,11 +809,6 @@ rloggammag1<-function(n, spec, a=1, b=1, ...)
         sf<-qloggammag1(u, spec, a=a, b=b, ...)
 	return(sf)
 }
-
-#M. Amini, S. M. T. K. MirMostafaee, J. Ahmadi
-#Log-gamma-generated families of distributions
-#Statistics, doi: 10.1080/02331888.2012.748775
-
 
 
 
@@ -932,8 +849,8 @@ qloggammag2<-function(p, spec, a=1, b=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(exp(-(1/b)*qgamma(p,shape=a)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(exp(-(1/b)*qgamma(p[p>=0&p<=1],shape=a)), ...)
 	return(qf)
 
 }
@@ -945,11 +862,6 @@ rloggammag2<-function(n, spec, a=1, b=1, ...)
         sf<-qloggammag2(u, spec, a=a, b=b, ...)
 	return(sf)
 }
-
-
-#Zografos, K. and Balakrishnan, N. (2009).
-#On families of beta- and generalized gamma-generated distributions and associated inference.
-#Statistical Methodology, 6, 344-362.
 
 
 
@@ -989,8 +901,8 @@ qgammag1<-function(p, spec, a=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(1-exp(-qgamma(p,shape=a)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(1-exp(-qgamma(p[p>=0&p<=1],shape=a)), ...)
 	return(qf)
 
 }
@@ -1004,9 +916,6 @@ rgammag1<-function(n, spec, a=1, ...)
 }
 
 
-#Ristic, M. M. and Balakrishnan, N. (2012).
-#The gamma exponentiated exponential distribution.
-#Journal of Statistical Computation and Simulation, 82, 1191-1206.
 
 
 dgammag2<-function(x, spec, a=1, log=FALSE, ...)
@@ -1043,8 +952,8 @@ qgammag2<-function(p, spec, a=1, log.p=FALSE, lower.tail=TRUE, ...)
         if (lower.tail==FALSE) p<-1-p
         Fq<-function (z, ...) {do.call(paste("q",spec,sep=""),list(z, ...))}
 
-	qf<-p
-        qf<-Fq(exp(-qgamma(1-p,shape=a)), ...)
+	qf<-rep(NaN,length(p))
+        qf[p>=0&p<=1]<-Fq(exp(-qgamma(1-p[p>=0&p<=1],shape=a)), ...)
 	return(qf)
 
 }
@@ -1054,4 +963,2204 @@ rgammag2<-function(n, spec, a=1, ...)
 	u<-runif(n,min=0,max=1)
         sf<-qgammag2(u, spec, a=a, ...)
 	return(sf)
+}
+
+mbeg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[4]; dexp(x,rate)}
+cum=function(par,x){rate=par[4]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[4]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[4]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[4]; b=par[5]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[4]; scale=par[5]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[4]; scale=par[5]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[4]; rate=par[5]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[4]; rate=par[5]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[4]; sdlog=par[5]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[4]; sdlog=par[5]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[4]; dchisq(x,df)}
+cum=function(par,x){df=par[4]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[4]; df2=par[5]; df(x,df1,df2)}
+cum=function(par,x){df1=par[4]; df2=par[5]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[4]; d=par[5]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[4]; d=par[5]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[4]; b=par[5]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[4]; b=par[5]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[4]; b=par[5]; 1-(1+a*x)^(-b)}
+}
+
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[4]; b=par[5]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[4]; b=par[5]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+lambda=par[3]
+lambda*f0*beta(a,b)^(-1)*(1-exp(-lambda*c0))^(a-1)*exp(-lambda*b*c0)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+lambda=par[3]
+pbeta(1-exp(-lambda*c0),shape1=a,shape2=b)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+mbetaexpg<-function(g, data, starts, method="BFGS"){
+
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[4]; dexp(x,rate)}
+cum=function(par,x){rate=par[4]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[4]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[4]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[4]; b=par[5]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[4]; scale=par[5]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[4]; scale=par[5]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[4]; rate=par[5]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[4]; rate=par[5]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[4]; sdlog=par[5]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[4]; sdlog=par[5]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[4]; dchisq(x,df)}
+cum=function(par,x){df=par[4]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[4]; df2=par[5]; df(x,df1,df2)}
+cum=function(par,x){df1=par[4]; df2=par[5]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[4]; d=par[5]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[4]; d=par[5]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[4]; b=par[5]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[4]; b=par[5]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[4]; b=par[5]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[4]; b=par[5]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[4]; b=par[5]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+lambda=par[3]
+lambda*f0*beta(a,b)^(-1)*(1-c0)^(lambda*b-1)*(1-(1-c0)^lambda)^(a-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+lambda=par[3]
+1-pbeta((1-c0)**lambda,shape1=lambda*(b-1)+1,shape2=a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mbetag<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+                                           
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+f0*beta(a,b)^(-1)*c0^(a-1)*(1-c0)^(b-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+pbeta(c0,shape1=a,shape2=b)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+meepg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+a*b*(1-exp(-b))^(-1)*f0*c0^(a-1)*exp(-b*c0^a)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+(1-exp(-b))^(-1)*(1-exp(-b*c0^a))
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+meg<-function(g, data, starts, method="BFGS"){
+
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+r=par[1]
+u=par[2]
+r*u*f0*((1-c0)^(r-1))*(1-(1-c0)^r)^(u-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+r=par[1]
+u=par[2]
+(1-(1-c0)^r)^u
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else{"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mexpg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[2]; dexp(x,rate)}
+cum=function(par,x){rate=par[2]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[2]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[2]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[2]; b=par[3]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[2]; scale=par[3]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[2]; scale=par[3]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[2]; rate=par[3]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[2]; rate=par[3]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[2]; sdlog=par[3]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[2]; sdlog=par[3]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[2]; dchisq(x,df)}
+cum=function(par,x){df=par[2]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[2]; df2=par[3]; df(x,df1,df2)}
+cum=function(par,x){df1=par[2]; df2=par[3]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[2]; d=par[3]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[2]; d=par[3]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[2]; b=par[3]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[2]; b=par[3]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[2]; b=par[3]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[2]; b=par[3]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[2]; b=par[3]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+a*f0*c0^(a-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+c0^a
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+mexpkumg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[4]; dexp(x,rate)}
+cum=function(par,x){rate=par[4]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[4]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[4]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[4]; b=par[5]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[4]; scale=par[5]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[4]; scale=par[5]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[4]; rate=par[5]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[4]; rate=par[5]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[4]; sdlog=par[5]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[4]; sdlog=par[5]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[4]; dchisq(x,df)}
+cum=function(par,x){df=par[4]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[4]; df2=par[5]; df(x,df1,df2)}
+cum=function(par,x){df1=par[4]; df2=par[5]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[4]; d=par[5]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[4]; d=par[5]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[4]; b=par[5]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[4]; b=par[5]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[4]; b=par[5]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[4]; b=par[5]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[4]; b=par[5]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+d=par[3]
+a*b*d*f0*c0^(a-1)*(1-c0^a)^(b-1)*(1-(1-c0^a)^b)^(d-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+d=par[3]
+(1-(1-c0^a)^b)^d
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mgammag1<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[2]; dexp(x,rate)}
+cum=function(par,x){rate=par[2]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[2]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[2]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[2]; b=par[3]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[2]; scale=par[3]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[2]; scale=par[3]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[2]; rate=par[3]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[2]; rate=par[3]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[2]; sdlog=par[3]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[2]; sdlog=par[3]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[2]; dchisq(x,df)}
+cum=function(par,x){df=par[2]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[2]; df2=par[3]; df(x,df1,df2)}
+cum=function(par,x){df1=par[2]; df2=par[3]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[2]; d=par[3]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[2]; d=par[3]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[2]; b=par[3]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[2]; b=par[3]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[2]; b=par[3]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[2]; b=par[3]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[2]; b=par[3]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+gamma(a)^(-1)*f0*(-log(1-c0))^(a-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+pgamma(-log(1-c0),shape=a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mgammag2<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[2]; dexp(x,rate)}
+cum=function(par,x){rate=par[2]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[2]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[2]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[2]; b=par[3]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[2]; scale=par[3]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[2]; scale=par[3]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[2]; rate=par[3]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[2]; rate=par[3]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[2]; sdlog=par[3]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[2]; sdlog=par[3]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[2]; dchisq(x,df)}
+cum=function(par,x){df=par[2]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[2]; df2=par[3]; df(x,df1,df2)}
+cum=function(par,x){df1=par[2]; df2=par[3]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[2]; d=par[3]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[2]; d=par[3]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[2]; b=par[3]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[2]; b=par[3]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[2]; b=par[3]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[2]; b=par[3]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[2]; b=par[3]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+gamma(a)^(-1)*f0*(-log(c0))^(a-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+pgamma(-log(c0),shape=a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mgammag<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[2]; dexp(x,rate)}
+cum=function(par,x){rate=par[2]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[2]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[2]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[2]; b=par[3]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[2]; scale=par[3]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[2]; scale=par[3]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[2]; rate=par[3]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[2]; rate=par[3]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[2]; sdlog=par[3]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[2]; sdlog=par[3]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[2]; dchisq(x,df)}
+cum=function(par,x){df=par[2]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[2]; df2=par[3]; df(x,df1,df2)}
+cum=function(par,x){df1=par[2]; df2=par[3]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[2]; d=par[3]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[2]; d=par[3]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[2]; b=par[3]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[2]; b=par[3]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[2]; b=par[3]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[2]; b=par[3]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[2]; b=par[3]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+gamma(a)^(-1)*f0*(1-c0)^(-2)*(c0/(1-c0))^(a-1)*exp(-c0/(1-c0))
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+pgamma(c0/(1-c0),shape=a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mgbg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[4]; dexp(x,rate)}
+cum=function(par,x){rate=par[4]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[4]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[4]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[4]; b=par[5]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[4]; scale=par[5]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[4]; scale=par[5]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[4]; rate=par[5]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[4]; rate=par[5]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[4]; sdlog=par[5]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[4]; sdlog=par[5]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[4]; dchisq(x,df)}
+cum=function(par,x){df=par[4]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[4]; df2=par[5]; df(x,df1,df2)}
+cum=function(par,x){df1=par[4]; df2=par[5]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[4]; d=par[5]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[4]; d=par[5]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[4]; b=par[5]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[4]; b=par[5]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[4]; b=par[5]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[4]; b=par[5]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[4]; b=par[5]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+d=par[3]
+d*beta(a,b)^(-1)*f0*c0^(a*d-1)*(1-c0^d)^(b-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+d=par[3]
+pbeta(c0^d,shape1=a,shape2=b)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+mgepg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+theta=par[1]
+eta=par[2]
+theta*(1-eta)*(1-exp(-theta))*f0*exp(-theta+theta*c0)/(1-exp(-theta)-eta+eta*exp(-theta+theta*c0))**2
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+theta=par[1]
+eta=par[2]
+(exp(-theta+theta*c0)-exp(-theta))/(1-exp(-theta)-eta+eta*exp(-theta+theta*c0))
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mkumg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+r=par[1]
+u=par[2]
+r*u*f0*(c0^(r-1))*(1-c0^r)^(u-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+r=par[1]
+u=par[2]
+1-(1-c0^r)^u
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else{"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mloggammag1<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+b^a*gamma(a)^(-1)*f0*(-log(1-c0))^(a-1)*(1-c0)^(b-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+1-pgamma(-b*log(1-c0),shape=a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mloggammag2<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+b^a*gamma(a)^(-1)*f0*(-log(c0))^(a-1)*(c0)^(b-1)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+1-pgamma(-b*log(c0),shape=a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+mmbetag<-function(g, data, starts, method="BFGS"){
+
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[4]; dexp(x,rate)}
+cum=function(par,x){rate=par[4]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[4]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[4]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[4]; b=par[5]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[4]; scale=par[5]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[4]; scale=par[5]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[4]; rate=par[5]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[4]; rate=par[5]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[4]; sdlog=par[5]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[4]; sdlog=par[5]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[4]; dchisq(x,df)}
+cum=function(par,x){df=par[4]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[4]; df2=par[5]; df(x,df1,df2)}
+cum=function(par,x){df1=par[4]; df2=par[5]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[4]; d=par[5]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[4]; d=par[5]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[4]; b=par[5]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[4]; b=par[5]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[4]; b=par[5]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[4]; b=par[5]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[4]; b=par[5]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[4]; b=par[5]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[4]; b=par[5]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+d=par[3]
+d^a*f0*beta(a,b)^(-1)*c0^(a-1)*(1-c0)^(b-1)*(1-(1-d)*c0)^(-a-b)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+d=par[3]
+pbeta(d*c0/(1-(1-d)*c0),shape1=a,shape2=b)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+mmog<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[2]; dexp(x,rate)}
+cum=function(par,x){rate=par[2]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[2]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[2]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[2]; b=par[3]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[2]; scale=par[3]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[2]; scale=par[3]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[2]; rate=par[3]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[2]; rate=par[3]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[2]; sdlog=par[3]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[2]; sdlog=par[3]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[2]; dchisq(x,df)}
+cum=function(par,x){df=par[2]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[2]; df2=par[3]; df(x,df1,df2)}
+cum=function(par,x){df1=par[2]; df2=par[3]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[2]; d=par[3]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[2]; d=par[3]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[2]; b=par[3]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[2]; b=par[3]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[2]; b=par[3]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[2]; b=par[3]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[2]; b=par[3]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+r=par[1]
+r*f0/((1-(1-r)*(1-c0))^2)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+r=par[1]
+1-r*(1-c0)/(1-(1-r)*(1-c0))
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+mtessg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[2]; dexp(x,rate)}
+cum=function(par,x){rate=par[2]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[2]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[2]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[2]; b=par[3]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[2]; scale=par[3]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[2]; scale=par[3]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[2]; rate=par[3]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[2]; rate=par[3]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[2]; sdlog=par[3]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[2]; sdlog=par[3]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[2]; dchisq(x,df)}
+cum=function(par,x){df=par[2]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[2]; df2=par[3]; df(x,df1,df2)}
+cum=function(par,x){df1=par[2]; df2=par[3]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[2]; d=par[3]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[2]; d=par[3]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[2]; b=par[3]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[2]; b=par[3]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[2]; b=par[3]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[2]; b=par[3]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[2]; b=par[3]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[2]; b=par[3]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[2]; b=par[3]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+a*(1-exp(-a))^(-1)*f0*exp(-a*c0)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+(1-exp(-a*c0))*(1-exp(-a))^(-1)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else {"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
+}
+
+
+
+mweibullg<-function(g, data, starts, method="BFGS"){
+
+if(g!="exp" & g!="rayleigh" & g!="weibull" & g!="gompertz" & g!="gamma" 
+ & g!="lnorm" & g!="chisq" & g!="f" & g!="burrxii" & g!="frechet" 
+ & g!="lomax" & g!="log-logistic" & g!="lfr" & g!="chen")
+ { stop ("Baseline distribution not implemented or misspelled. Please check the manual for guidelines.") }
+
+if(g=="exp"){
+den=function(par,x){rate=par[3]; dexp(x,rate)}
+cum=function(par,x){rate=par[3]; pexp(x,rate)}
+}
+
+if(g=="rayleigh"){
+den=function(par,x){a=par[3]; 2*x*a*exp(-a*x^2)}
+cum=function(par,x){a=par[3]; 1-exp(-a*x^2)}
+}
+
+if(g=="gompertz"){
+den=function(par,x){a=par[3]; b=par[4]; b*exp(a*x)*exp(-(exp(a*x)-1)*b/a)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-(exp(a*x)-1)*b/a)}
+}
+
+if(g=="weibull"){
+den=function(par,x){shape=par[3]; scale=par[4]; dweibull(x,shape,scale)}
+cum=function(par,x){shape=par[3]; scale=par[4]; pweibull(x,shape,scale)}
+}
+
+if(g=="gamma"){
+den=function(par,x){shape=par[3]; rate=par[4]; dgamma(x,shape,rate)}
+cum=function(par,x){shape=par[3]; rate=par[4]; pgamma(x,shape,rate)}
+}
+
+if(g=="lnorm"){
+den=function(par,x){meanlog=par[3]; sdlog=par[4]; dlnorm(x,meanlog,sdlog)}
+cum=function(par,x){meanlog=par[3]; sdlog=par[4]; plnorm(x,meanlog,sdlog)}
+}
+
+if(g=="chisq"){
+den=function(par,x){df=par[3]; dchisq(x,df)}
+cum=function(par,x){df=par[3]; pchisq(x,df)}
+}
+
+if(g=="f"){
+den=function(par,x){df1=par[3]; df2=par[4]; df(x,df1,df2)}
+cum=function(par,x){df1=par[3]; df2=par[4]; pf(x,df1,df2)}
+}
+
+if(g=="burrxii"){
+den=function(par,x){a=par[3]; d=par[4]; d*a*(1+(x)^d)^(-a-1)*(x^(d-1))}
+cum=function(par,x){a=par[3]; d=par[4]; 1-(1+(x)^d)^(-a)}
+}
+
+if(g=="frechet"){
+den=function(par,x){a=par[3]; b=par[4]; (a*exp(-(x/b)^(-a))*(x/b)^(-a-1))/(b)}
+cum=function(par,x){a=par[3]; b=par[4]; exp(-(x/b)^(-a))}
+}
+
+if(g=="lomax"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b)/((1+a*x)^(b+1))}
+cum=function(par,x){a=par[3]; b=par[4]; 1-(1+a*x)^(-b)}
+}
+
+if(g=="log-logistic"){
+den=function(par,x){a=par[3]; b=par[4]; (a*b^(-a)*x^(a-1))/(((x/b)^a +1)^2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1/((x/b)^(-a)+1)}
+}
+
+if(g=="lfr"){
+den=function(par,x){a=par[3]; b=par[4]; (a+b*x)*exp(-a*x-(b*x^2)/2)}
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-a*x-(b*x^2)/2)}
+}
+
+if(g=="chen"){
+den=function(par,x){a=par[3]; b=par[4]; a*b*x^(a-1)*exp(x^a)*exp(-b*(exp(x^a)-1))}     
+cum=function(par,x){a=par[3]; b=par[4]; 1-exp(-b*(exp(x^a)-1))}
+}
+
+
+
+pdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+a*b**(-a)*(f0/(1-c0))*(-log(1-c0))**(a-1)*exp(-b**(-a)*(-log(1-c0))**a)
+}
+
+cdf0<-function(par,x){
+f0=den(par,x)
+c0=cum(par,x)
+a=par[1]
+b=par[2]
+1-exp(-b**(-a)*(-log(1-c0))**a)
+}
+
+med=suppressWarnings(goodness.fit(pdf=pdf0, cdf=cdf0, starts=starts, data=data, method=method, mle=NULL))
+
+aux=cbind(med$mle,med$Erro,med$mle+qnorm(0.025)*med$Erro,med$mle+qnorm(0.975)*med$Erro)
+colnames(aux)=c("MLE","Std. Dev.","Inf. 95% CI","Sup. 95% CI")
+
+aux1=cbind(med$AIC, med$CAIC, med$BIC, med$HQIC, med$W, med$A, med$Value)
+colnames(aux1)=c("AIC","CAIC","BIC","HQIC","W","A", "Min(-log(Likelihood))")
+rownames(aux1)=c("")
+
+aux2=cbind(med$KS$statistic,med$KS$p.value)
+colnames(aux2)=c("KS Statistic","KS p-value")
+rownames(aux2)=c("")
+
+aux3=cbind(if(med$Convergence==0){"Algorithm Converged"} else{"Algorithm Not Converged"})
+colnames(aux3)=c("")
+rownames(aux3)=c("")
+
+list("Estimates"=aux,"Measures"=aux1,"Kolmogorov-Smirnov Test"=aux2,"Convergence Status"=aux3)
 }
