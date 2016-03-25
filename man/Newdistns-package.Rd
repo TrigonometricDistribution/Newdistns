@@ -11,8 +11,8 @@ beta extended G distributions due to Cordeiro et al. (2012), gamma G distributio
 \tabular{ll}{
 Package: \tab Newdistns\cr
 Type: \tab Package\cr
-Version: \tab 2.0\cr
-Date: \tab 2015-02-27\cr
+Version: \tab 2.1\cr
+Date: \tab 2016-03-24\cr
 License: \tab GPL(>=2)
 }
 probability density function, cumulative distribution function, quantile function, random numbers and measures of inference
@@ -41,7 +41,7 @@ A. J. Lemonte, W. Barreto-Souza, G. M. Cordeiro, The exponentiated Kumaraswamy d
 
 A. W. Marshall, I. Olkin, A new method for adding a parameter to a family of distributions with application to the exponential and Weibull families, Biometrika 84 (1997) 641-652
 
-S. Nadarajah, Newdistns: An R Package for new families of distributions, submitted
+S. Nadarajah and R. Rocha, Newdistns: An R Package for New Families of Distributions, Journal of Statistical Software, 69(10), 1-32, doi:10.18637/jss.v069.i10
 
 S. Nadarajah, V. G. Cancho, E. M. M. Ortega, The geometric exponential Poisson distribution, Stat Methods Appl 22 (2013a) 355-380
 

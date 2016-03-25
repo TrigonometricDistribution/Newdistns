@@ -33,7 +33,7 @@ mbeg(g, data, starts, method = "BFGS")
   \item{starts}{initial values of \code{(alpha, a, b, r)} if \code{g} has one parameter or initial values of \code{(alpha, a, b, r, s)} if \code{g} has two parameters}
   \item{method}{the method for optimizing the log likelihood function.  It can be one of \code{"Nelder-Mead"}, \code{"BFGS"}, \code{"CG"}, \code{"L-BFGS-B"} or \code{"SANN"}.  The default is \code{"BFGS"}.  The details of these methods can be found in the manual pages for  \code{optim}}}
 \value{An object of the same length as \code{x}, giving the pdf or cdf values computed at \code{x} or an object of the same length as \code{p}, giving the quantile values computed at \code{p} or an object of the same length as \code{n}, giving the random numbers generated or an object giving the values of Cramer-von Misses statistic, Anderson Darling statistic, Kolmogorov Smirnov test statistic and p-value, maximum likelihood estimates, Akaike Information Criterion, Consistent Akaikes Information Criterion, Bayesian Information Criterion, Hannan-Quinn information criterion, standard errors of the maximum likelihood estimates, minimum value of the negative log-likelihood function and convergence status.}
-\references{S. Nadarajah and R. Rocha, Newdistns: An R Package for new families of distributions, submitted
+\references{S. Nadarajah and R. Rocha, Newdistns: An R Package for New Families of Distributions, Journal of Statistical Software, 69(10), 1-32, doi:10.18637/jss.v069.i10
 
 G. M. Cordeiro, E. M. M. Ortega, G. Silva, The beta extended Weibull family, Journal of Probability and Statistical Science 10 (2012) 15-40}
 \note{NaNs can be produced if \eqn{p \not \in [0, 1 - \exp (-\alpha)]}.}

@@ -31,7 +31,7 @@ mloggammag1(g, data, starts, method = "BFGS")
   \item{starts}{initial values of \code{(a, b, r)} if \code{g} has one parameter or initial values of \code{(a, b, r, s)} if \code{g} has two parameters}
   \item{method}{the method for optimizing the log likelihood function.  It can be one of \code{"Nelder-Mead"}, \code{"BFGS"}, \code{"CG"}, \code{"L-BFGS-B"} or \code{"SANN"}.  The default is \code{"BFGS"}.  The details of these methods can be found in the manual pages for  \code{optim}}}
 \value{An object of the same length as \code{x}, giving the pdf or cdf values computed at \code{x} or an object of the same length as \code{p}, giving the quantile values computed at \code{p} or an object of the same length as \code{n}, giving the random numbers generated or an object giving the values of Cramer-von Misses statistic, Anderson Darling statistic, Kolmogorov Smirnov test statistic and p-value, maximum likelihood estimates, Akaike Information Criterion, Consistent Akaikes Information Criterion, Bayesian Information Criterion, Hannan-Quinn information criterion, standard errors of the maximum likelihood estimates, minimum value of the negative log-likelihood function and convergence status.}
-\references{S. Nadarajah and R. Rocha, Newdistns: An R Package for new families of distributions, submitted 
+\references{S. Nadarajah and R. Rocha, Newdistns: An R Package for New Families of Distributions, Journal of Statistical Software, 69(10), 1-32, doi:10.18637/jss.v069.i10
 
 M. Amini, S. M. T. K. MirMostafaee, J. Ahmadi, Log-gamma-generated families of distributions, Statistics, 2013, doi: 10.1080/02331888.2012.748775}
 \author{Saralees Nadarajah, Ricardo Rocha}

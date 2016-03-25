@@ -1,2 +1,6 @@
 exportPattern("^[[:alpha:]]+")
 import(AdequacyModel)
+importFrom("stats", "dbeta", "dchisq", "dexp", "df", "dgamma",
+"dlnorm", "dweibull", "pbeta", "pchisq", "pexp", "pf",
+"pgamma", "plnorm", "pweibull", "qbeta", "qgamma", "qnorm",
+"runif")

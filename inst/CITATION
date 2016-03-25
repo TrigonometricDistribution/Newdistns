@@ -1,0 +1,22 @@
+bibentry(bibtype = "Article",
+  title        = "{Newdistns}: An {R} Package for New Families of Distributions",
+  author       = c(person(given = "Saralees",
+                          family = "Nadarajah",
+                          email = "Saralees.Nadarajah@manchester.ac.uk"),
+                   person(given = "Ricardo",
+                          family = "Rocha")),
+  journal      = "Journal of Statistical Software",
+  year         = "2016",
+  volume       = "69",
+  number       = "10",
+  pages        = "1--32",
+  doi          = "10.18637/jss.v069.i10",
+
+  header       = "To cite Newdistns in publications use:",
+  textVersion  =
+  paste("Saralees Nadarajah, Ricardo Rocha (2016).",
+        "Newdistns: An R Package for New Families of Distributions.",
+        "Journal of Statistical Software, 69(10), 1-32.",
+        "doi:10.18637/jss.v069.i10")
+)
+
